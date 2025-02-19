@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 
-public class dashboard extends javax.swing.JFrame {
+public class adminDashOverview extends javax.swing.JFrame {
 
     /**
      * Creates new form dashboard
      */
-    public dashboard() {
+    public adminDashOverview() {
         initComponents();
         loadUsers();
     }
@@ -63,10 +63,7 @@ public class dashboard extends javax.swing.JFrame {
                    
                 });
             }
-
-            dashTable.setModel(model);
-            model.fireTableDataChanged(); 
-
+          
             rs.close();
             stmt.close();
             conn.close(); 
@@ -90,9 +87,8 @@ public class dashboard extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jInternalFrame2 = new javax.swing.JInternalFrame();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        dashTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         signInUser1 = new javax.swing.JLabel();
@@ -101,15 +97,17 @@ public class dashboard extends javax.swing.JFrame {
         welcome = new javax.swing.JLabel();
         adminmsg = new javax.swing.JLabel();
         LOGOUT = new javax.swing.JLabel();
-        OK = new javax.swing.JLabel();
-        ADD = new javax.swing.JLabel();
-        UPDATE = new javax.swing.JLabel();
-        ARCHIVE = new javax.swing.JLabel();
-        BACK = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jTextField1 = new javax.swing.JTextField();
 
         jInternalFrame1.setVisible(true);
 
         jInternalFrame2.setVisible(true);
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,18 +116,6 @@ public class dashboard extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        dashTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(dashTable);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 610, 380));
 
         jPanel2.setBackground(new java.awt.Color(0, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,77 +163,25 @@ public class dashboard extends javax.swing.JFrame {
         });
         jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 590));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 590));
 
-        OK.setBackground(new java.awt.Color(0, 204, 204));
-        OK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        OK.setForeground(new java.awt.Color(255, 255, 255));
-        OK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        OK.setText("OK");
-        OK.setDoubleBuffered(true);
-        OK.setOpaque(true);
-        OK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                OKMouseClicked(evt);
-            }
-        });
-        jPanel1.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 50, 30));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setAutoscrolls(true);
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ADD.setBackground(new java.awt.Color(0, 204, 204));
-        ADD.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        ADD.setForeground(new java.awt.Color(255, 255, 255));
-        ADD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ADD.setText("ADD");
-        ADD.setDoubleBuffered(true);
-        ADD.setOpaque(true);
-        ADD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ADDMouseClicked(evt);
-            }
-        });
-        jPanel1.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 130, 30));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
-        UPDATE.setBackground(new java.awt.Color(0, 204, 204));
-        UPDATE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        UPDATE.setForeground(new java.awt.Color(255, 255, 255));
-        UPDATE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UPDATE.setText("UPDATE");
-        UPDATE.setDoubleBuffered(true);
-        UPDATE.setOpaque(true);
-        UPDATE.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UPDATEMouseClicked(evt);
-            }
-        });
-        jPanel1.add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 130, 30));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 330, -1));
 
-        ARCHIVE.setBackground(new java.awt.Color(0, 204, 204));
-        ARCHIVE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        ARCHIVE.setForeground(new java.awt.Color(255, 255, 255));
-        ARCHIVE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ARCHIVE.setText("ARCHIVE");
-        ARCHIVE.setDoubleBuffered(true);
-        ARCHIVE.setOpaque(true);
-        ARCHIVE.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ARCHIVEMouseClicked(evt);
-            }
-        });
-        jPanel1.add(ARCHIVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 30));
+        jTextField1.setText("jTextField1");
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 630, -1, -1));
 
-        BACK.setBackground(new java.awt.Color(0, 204, 204));
-        BACK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
-        BACK.setForeground(new java.awt.Color(255, 255, 255));
-        BACK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BACK.setText("BACK");
-        BACK.setDoubleBuffered(true);
-        BACK.setOpaque(true);
-        BACK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BACKMouseClicked(evt);
-            }
-        });
-        jPanel1.add(BACK, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 130, 30));
+        jScrollPane1.setViewportView(jPanel3);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -10, 630, 610));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 590));
 
@@ -258,33 +192,6 @@ public class dashboard extends javax.swing.JFrame {
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
         this.dispose();
     }//GEN-LAST:event_LOGOUTMouseClicked
-
-    private void OKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OKMouseClicked
-
-     
-
-        //        dashboard dash = new dashboard();
-        //        dash.setLocationRelativeTo(null);
-        //        dash.setVisible(true);
-        //
-        //        this.dispose();
-    }//GEN-LAST:event_OKMouseClicked
-
-    private void ADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ADDMouseClicked
-
-    private void UPDATEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UPDATEMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UPDATEMouseClicked
-
-    private void ARCHIVEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ARCHIVEMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ARCHIVEMouseClicked
-
-    private void BACKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BACKMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BACKMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,41 +210,41 @@ public class dashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminDashOverview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminDashOverview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminDashOverview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(adminDashOverview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashboard().setVisible(true);
+                new adminDashOverview().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ADD;
-    private javax.swing.JLabel ARCHIVE;
-    private javax.swing.JLabel BACK;
     private javax.swing.JLabel LOGOUT;
-    private javax.swing.JLabel OK;
-    private javax.swing.JLabel UPDATE;
     private javax.swing.JLabel admin;
     private javax.swing.JLabel adminmsg;
-    private javax.swing.JTable dashTable;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel signInUser1;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables

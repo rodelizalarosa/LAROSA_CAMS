@@ -7,7 +7,7 @@ package signInUp;
 
 import config.connectDB;
 import dashboard.Udashboard;
-import dashboard.dashboard;
+import dashboard.adminDash;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class signIn extends javax.swing.JFrame {
         initComponents();
     }
 
-        dashboard dash = new dashboard();
+        adminDash dash = new adminDash();
         Udashboard udash = new Udashboard();
         
             public static String signIn(String username, String password) {
@@ -304,7 +304,7 @@ public class signIn extends javax.swing.JFrame {
                 this.dispose(); 
 
                 if (role.equalsIgnoreCase("admin")) { 
-                    new dashboard().setVisible(true);  
+                    new adminDash().setVisible(true);  
                     
                 } else {
                     

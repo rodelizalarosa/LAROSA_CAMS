@@ -139,14 +139,14 @@ public class signUp extends javax.swing.JFrame {
         jPanel4.add(forgotPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 306, 150, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/medlogo.png"))); // NOI18N
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 100, 110));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 100, 110));
 
         SU.setBackground(new java.awt.Color(255, 255, 255));
         SU.setFont(new java.awt.Font("Nirmala UI", 1, 24)); // NOI18N
         SU.setForeground(new java.awt.Color(255, 255, 255));
         SU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SU.setText("Welcome Back!");
-        jPanel4.add(SU, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 190, 40));
+        jPanel4.add(SU, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 190, 40));
 
         desc4.setBackground(new java.awt.Color(255, 255, 255));
         desc4.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
@@ -155,7 +155,7 @@ public class signUp extends javax.swing.JFrame {
         desc4.setText("login your personal details.");
         desc4.setAutoscrolls(true);
         desc4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(desc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 290, -1));
+        jPanel4.add(desc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 290, -1));
 
         desc5.setBackground(new java.awt.Color(255, 255, 255));
         desc5.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
@@ -164,7 +164,7 @@ public class signUp extends javax.swing.JFrame {
         desc5.setText("To keep connected with us, please");
         desc5.setAutoscrolls(true);
         desc5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel4.add(desc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 290, -1));
+        jPanel4.add(desc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 290, -1));
 
         SIGNUP.setBackground(new java.awt.Color(255, 255, 255));
         SIGNUP.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
@@ -178,9 +178,9 @@ public class signUp extends javax.swing.JFrame {
                 SIGNUPMouseClicked(evt);
             }
         });
-        jPanel4.add(SIGNUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 130, 30));
+        jPanel4.add(SIGNUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 130, 30));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 490));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 490));
 
         mnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         mnameSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -189,26 +189,26 @@ public class signUp extends javax.swing.JFrame {
                 mnameSUActionPerformed(evt);
             }
         });
-        jPanel1.add(mnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, 220, 30));
+        jPanel1.add(mnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 220, 30));
 
         signUpUser.setBackground(new java.awt.Color(255, 255, 255));
         signUpUser.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         signUpUser.setForeground(new java.awt.Color(0, 204, 204));
         signUpUser.setText("Type");
-        jPanel1.add(signUpUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, -1, 30));
+        jPanel1.add(signUpUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, 30));
 
         signUpPass.setBackground(new java.awt.Color(255, 255, 255));
         signUpPass.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         signUpPass.setForeground(new java.awt.Color(0, 204, 204));
         signUpPass.setText("Password");
-        jPanel1.add(signUpPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 70, 30));
+        jPanel1.add(signUpPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 70, 30));
 
         passSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passSUActionPerformed(evt);
             }
         });
-        jPanel1.add(passSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, 30));
+        jPanel1.add(passSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 220, 30));
 
         SIGNIN1.setBackground(new java.awt.Color(0, 204, 204));
         SIGNIN1.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
@@ -222,7 +222,7 @@ public class signUp extends javax.swing.JFrame {
                 SIGNIN1MouseClicked(evt);
             }
         });
-        jPanel1.add(SIGNIN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, 130, 30));
+        jPanel1.add(SIGNIN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 130, 30));
 
         userSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         userSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -231,7 +231,7 @@ public class signUp extends javax.swing.JFrame {
                 userSUActionPerformed(evt);
             }
         });
-        jPanel1.add(userSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 220, 30));
+        jPanel1.add(userSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 220, 30));
 
         fnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         fnameSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -240,7 +240,7 @@ public class signUp extends javax.swing.JFrame {
                 fnameSUActionPerformed(evt);
             }
         });
-        jPanel1.add(fnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 220, 30));
+        jPanel1.add(fnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 220, 30));
 
         contSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         contSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -249,7 +249,7 @@ public class signUp extends javax.swing.JFrame {
                 contSUActionPerformed(evt);
             }
         });
-        jPanel1.add(contSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 220, 30));
+        jPanel1.add(contSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, 30));
 
         lnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         lnameSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -258,7 +258,7 @@ public class signUp extends javax.swing.JFrame {
                 lnameSUActionPerformed(evt);
             }
         });
-        jPanel1.add(lnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, 220, 30));
+        jPanel1.add(lnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, 30));
 
         emailSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
         emailSU.setForeground(new java.awt.Color(204, 204, 255));
@@ -267,31 +267,31 @@ public class signUp extends javax.swing.JFrame {
                 emailSUActionPerformed(evt);
             }
         });
-        jPanel1.add(emailSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 220, 30));
+        jPanel1.add(emailSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 220, 30));
 
         signUpUser1.setBackground(new java.awt.Color(255, 255, 255));
         signUpUser1.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         signUpUser1.setForeground(new java.awt.Color(0, 204, 204));
         signUpUser1.setText("Username");
-        jPanel1.add(signUpUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, 30));
+        jPanel1.add(signUpUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, 30));
 
         fname.setBackground(new java.awt.Color(255, 255, 255));
         fname.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         fname.setForeground(new java.awt.Color(0, 204, 204));
         fname.setText("First Name");
-        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, 30));
+        jPanel1.add(fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, 30));
 
         mname.setBackground(new java.awt.Color(255, 255, 255));
         mname.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         mname.setForeground(new java.awt.Color(0, 204, 204));
         mname.setText("Middle Name");
-        jPanel1.add(mname, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 30));
+        jPanel1.add(mname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, 30));
 
         lname.setBackground(new java.awt.Color(255, 255, 255));
         lname.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         lname.setForeground(new java.awt.Color(0, 204, 204));
         lname.setText("Last Name");
-        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, 30));
+        jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 30));
 
         typeUser.setEditable(true);
         typeUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User Type", "Patient", "Doctor", "Staff" }));
@@ -300,26 +300,26 @@ public class signUp extends javax.swing.JFrame {
                 typeUserActionPerformed(evt);
             }
         });
-        jPanel1.add(typeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 220, 30));
+        jPanel1.add(typeUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 220, 30));
 
         cont.setBackground(new java.awt.Color(255, 255, 255));
         cont.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         cont.setForeground(new java.awt.Color(0, 204, 204));
         cont.setText("Contact Number");
-        jPanel1.add(cont, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, 30));
+        jPanel1.add(cont, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 200, -1, 30));
 
         signUpUser6.setBackground(new java.awt.Color(255, 255, 255));
         signUpUser6.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         signUpUser6.setForeground(new java.awt.Color(0, 204, 204));
         signUpUser6.setText("Email");
-        jPanel1.add(signUpUser6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, 30));
+        jPanel1.add(signUpUser6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, 30));
 
         SU1.setBackground(new java.awt.Color(0, 204, 204));
         SU1.setFont(new java.awt.Font("Nirmala UI", 1, 24)); // NOI18N
         SU1.setForeground(new java.awt.Color(0, 204, 204));
         SU1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SU1.setText("SIGN UP");
-        jPanel1.add(SU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 174, 40));
+        jPanel1.add(SU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 174, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
 

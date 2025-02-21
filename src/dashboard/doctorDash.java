@@ -1,10 +1,10 @@
 
 package dashboard;
 
-public class Udashboard extends javax.swing.JFrame {
+public class doctorDash extends javax.swing.JFrame {
 
    
-    public Udashboard() {
+    public doctorDash() {
         initComponents();
     }
 
@@ -92,7 +92,7 @@ public class Udashboard extends javax.swing.JFrame {
         ADD.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         ADD.setForeground(new java.awt.Color(255, 255, 255));
         ADD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ADD.setText("ADD");
+        ADD.setText("Add");
         ADD.setDoubleBuffered(true);
         ADD.setOpaque(true);
         ADD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,7 +106,7 @@ public class Udashboard extends javax.swing.JFrame {
         UPDATE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         UPDATE.setForeground(new java.awt.Color(255, 255, 255));
         UPDATE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UPDATE.setText("UPDATE");
+        UPDATE.setText("Update");
         UPDATE.setDoubleBuffered(true);
         UPDATE.setOpaque(true);
         UPDATE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,7 +120,7 @@ public class Udashboard extends javax.swing.JFrame {
         ARCHIVE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         ARCHIVE.setForeground(new java.awt.Color(255, 255, 255));
         ARCHIVE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ARCHIVE.setText("ARCHIVE");
+        ARCHIVE.setText("Archive");
         ARCHIVE.setDoubleBuffered(true);
         ARCHIVE.setOpaque(true);
         ARCHIVE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,7 +134,7 @@ public class Udashboard extends javax.swing.JFrame {
         BACK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         BACK.setForeground(new java.awt.Color(255, 255, 255));
         BACK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BACK.setText("BACK");
+        BACK.setText("Back");
         BACK.setDoubleBuffered(true);
         BACK.setOpaque(true);
         BACK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -219,20 +219,20 @@ public class Udashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Udashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Udashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Udashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Udashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doctorDash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Udashboard().setVisible(true);
+                new doctorDash().setVisible(true);
             }
         });
     }

@@ -18,7 +18,7 @@ public class signUp extends javax.swing.JFrame {
     public signUp() {
         initComponents();
     }
-    
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -371,105 +371,186 @@ public class signUp extends javax.swing.JFrame {
         String username = userSU.getText().trim();            
         char[] password = passSU.getPassword(); 
         
-        boolean isValid = true;
-        
+        StringBuilder errorMessage = new StringBuilder(); // Use StringBuilder for efficiency
+
             if (isAllFieldsEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please fill out the registration form", "Empty Form", JOptionPane.ERROR_MESSAGE);
-                return;
+                errorMessage.append("Please fill out the registration form.\n");
+            } else { // Only perform individual field checks if the form isn't completely empty
+                if (firstname.isEmpty()) {
+                    errorMessage.append("First Name cannot be empty.\n");
+                }
+                if (middlename.isEmpty()) {
+                    errorMessage.append("Middle Name cannot be empty.\n");
+                }
+                if (lastname.isEmpty()) {
+                    errorMessage.append("Last Name cannot be empty.\n");
+                }
+
+                String contactText = contSU.getText().trim();
+                if (contactText.isEmpty()) {
+                    errorMessage.append("Contact Number cannot be empty.\n");
+                } else if (!contactText.matches("\\d+")) {
+                    errorMessage.append("Contact Number must contain only numbers.\n");
+                }
+
+                if (typeUser.getSelectedIndex() == 0) {
+                    errorMessage.append("Please select a type.\n");
+                }
+
+                String emailText = emailSU.getText().trim();
+                if (emailText.isEmpty()) {
+                    errorMessage.append("Email cannot be empty.\n");
+                } else if (!isValidEmail(emailText)) {
+                    errorMessage.append("Invalid email format.\n");
+                }
+
+                String usernameText = userSU.getText().trim();
+                if (usernameText.isEmpty()) {
+                    errorMessage.append("Username cannot be empty.\n");
+                } else if (isUsernameTaken(usernameText)) {
+                    errorMessage.append("Username is already taken.\n");
+                }
+
+                String passwordText = new String(password);
+                if (passwordText.isEmpty()) {
+                    errorMessage.append("Password cannot be empty.\n");
+                } else if (passwordText.length() < 8) {
+                    errorMessage.append("Password must be at least 8 characters long.\n");
+                }
             }
 
-            if (fnameSU.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "First Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
 
-            if (mnameSU.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Middle Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
+            if (errorMessage.length() > 0) {  // Check if any errors were added
+                JOptionPane.showMessageDialog(this, errorMessage.toString(), "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return; // Stop further processing if there are errors
             }
+            
+                String passwordText = new String(password); // Get the password string *only* if validation passed.
+                String sql = "INSERT INTO users (user_fname, user_middle, user_lname, contact, email, user_type, user_name, user_pass, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try (PreparedStatement pst = connect.getConnection().prepareStatement(sql)) {
+                    pst.setString(1, firstname);
+                    pst.setString(2, middlename);
+                    pst.setString(3, lastname);
+                    pst.setString(4, contact);
+                    pst.setString(5, email);
+                    pst.setString(6, type);
+                    pst.setString(7, username);   
+                    pst.setString(8, passwordText);
+                    pst.setString(9, "pending");
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    fnameSU.setText("");
+                    mnameSU.setText("");
+                    lnameSU.setText("");
+                    contSU.setText("");
+                    emailSU.setText("");
+                    userSU.setText("");
+                    passSU.setText("");
 
-            if (lnameSU.getText().trim().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Last Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
+                } catch (SQLException ex) {     
+                Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
+            }     
 
-
-        String contactText = contSU.getText().trim();
-            if (contactText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Contact Number cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else if (!contactText.matches("\\d+")) {
-                JOptionPane.showMessageDialog(this, "Contact Number must contain only numbers", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
-
-            // Validate Type
-            if (typeUser.getSelectedIndex() == 0) {
-                JOptionPane.showMessageDialog(this, "Please select type", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
-
-        // Validate Username
-        String emailText = emailSU.getText().trim();
-            if (emailText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Email cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else if (!isValidEmail(emailText)) {
-                JOptionPane.showMessageDialog(this, "Invalid email format", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
-
-        // Validate Email
-        String usernameText = userSU.getText().trim();
-            if (usernameText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Username cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else if (isUsernameTaken(usernameText)) {
-                JOptionPane.showMessageDialog(this, "Username is already taken", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
-
-        // Validate Password
-        String passwordText = new String(password); // Convert char[] to String for validation
-            if (passwordText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            } else if (passwordText.length() < 8) {
-                JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
-                isValid = false;
-            }
+                    
+//        boolean isValid = true;
+//        
+//            if (isAllFieldsEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Please fill out the registration form", "Empty Form", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//
+//            if (fnameSU.getText().trim().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "First Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//            if (mnameSU.getText().trim().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Middle Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//            if (lnameSU.getText().trim().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Last Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//
+//        String contactText = contSU.getText().trim();
+//            if (contactText.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Contact Number cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            } else if (!contactText.matches("\\d+")) {
+//                JOptionPane.showMessageDialog(this, "Contact Number must contain only numbers", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//            // Validate Type
+//            if (typeUser.getSelectedIndex() == 0) {
+//                JOptionPane.showMessageDialog(this, "Please select type", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//        // Validate Username
+//        String emailText = emailSU.getText().trim();
+//            if (emailText.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Email cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            } else if (!isValidEmail(emailText)) {
+//                JOptionPane.showMessageDialog(this, "Invalid email format", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//        // Validate Email
+//        String usernameText = userSU.getText().trim();
+//            if (usernameText.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Username cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            } else if (isUsernameTaken(usernameText)) {
+//                JOptionPane.showMessageDialog(this, "Username is already taken", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
+//
+//        // Validate Password
+//        String passwordText = new String(password); // Convert char[] to String for validation
+//            if (passwordText.isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            } else if (passwordText.length() < 8) {
+//                JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//                isValid = false;
+//            }
         
         // If all validations pass, proceed with registration
-        if (isValid) {
+//        if (isValid) {
 //            String hashedPassword = BCrypt.hashpw(passwordText, BCrypt.gensalt());
             
-            String sql = "INSERT INTO users (user_fname, user_middle, user_lname, contact, email, user_type, user_name, user_pass, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Removed user_id
-            try (PreparedStatement pst = connect.getConnection().prepareStatement(sql)) {
-                pst.setString(1, firstname);
-                pst.setString(2, middlename);
-                pst.setString(3, lastname);
-                pst.setString(4, contact);
-                pst.setString(5, email);
-                pst.setString(6, type);
-                pst.setString(7, username);   
-                pst.setString(8, passwordText);
-                pst.setString(9, "pending");
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                fnameSU.setText("");
-                mnameSU.setText("");
-                lnameSU.setText("");
-                contSU.setText("");
-                emailSU.setText("");
-                userSU.setText("");
-                passSU.setText("");
-         
-            } catch (SQLException ex) {     
-            Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
-        }     
-            
+//            String sql = "INSERT INTO users (user_fname, user_middle, user_lname, contact, email, user_type, user_name, user_pass, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Removed user_id
+//            try (PreparedStatement pst = connect.getConnection().prepareStatement(sql)) {
+//                pst.setString(1, firstname);
+//                pst.setString(2, middlename);
+//                pst.setString(3, lastname);
+//                pst.setString(4, contact);
+//                pst.setString(5, email);
+//                pst String.setString(6, type);
+//                pst.setString(7, username);   
+//                pst.setString(8, passwordText);
+//                pst.setString(9, "pending");
+//                pst.executeUpdate();
+//                JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                fnameSU.setText("");
+//                mnameSU.setText("");
+//                lnameSU.setText("");
+//                contSU.setText("");
+//                emailSU.setText("");
+//                userSU.setText("");
+//                passSU.setText("");
+//         
+//            } catch (SQLException ex) {     
+//            Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
+//        }     
+//            
     }//GEN-LAST:event_SIGNIN1MouseClicked
-    }
+    
     private void SIGNUPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SIGNUPMouseClicked
         signIn sn = new signIn();
         sn.setLocationRelativeTo(null);

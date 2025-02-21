@@ -2,21 +2,62 @@
 package dashboard;
 
 import config.connectDB;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 public class adminDash extends javax.swing.JFrame {
 
-    /**
-     * Creates new form dashboard
-     */
+    private Color[] originalPanelColors = new Color[7];
+    private Color hoverPanelColor = Color.WHITE; // White hover color
+    private JPanel[] panels = new JPanel[7];
+    private JLabel[] labels = new JLabel[7];
+    private Color[] originalLabelColors = new Color[7];
+    private Color hoverLabelColor = new Color(0, 204, 204);
+    
     public adminDash() {
         initComponents();
         loadUsers();
+        
+        panels[0] = dashpanel; 
+        labels[0] = home;
+        panels[1] = dashpanel1; 
+        labels[1] = dashboard;
+        panels[2] = dashpanel2; 
+        labels[2] = patients; 
+        panels[3] = dashpanel3; 
+        labels[3] = doctors; 
+        panels[4] = dashpanel4; 
+        labels[4] = staffs; 
+        panels[5] = dashpanel5; 
+        labels[5] = appointments; 
+        panels[6] = dashpanel6; 
+        labels[6] = payment; 
+
+        for (int i = 0; i < 7; i++) {
+        originalPanelColors[i] = panels[i].getBackground();
+        originalLabelColors[i] = labels[i].getForeground();
+        hoverPanelListener listener = new hoverPanelListener(
+            hoverPanelColor, 
+            originalPanelColors[i], 
+            labels[i], 
+            hoverLabelColor 
+        );
+        panels[i].addMouseListener(listener);
+
+        panels[i].setOpaque(true); 
+        panels[i].repaint();
+
+        labels[i].repaint(); 
+        }
+        
+
     }
     
         
@@ -58,8 +99,6 @@ public class adminDash extends javax.swing.JFrame {
                     rs.getString("user_type"),
                     rs.getString("user_name"),
                     rs.getString("status"),
-                    
-                   
                    
                 });
             }
@@ -101,11 +140,25 @@ public class adminDash extends javax.swing.JFrame {
         welcome = new javax.swing.JLabel();
         adminmsg = new javax.swing.JLabel();
         LOGOUT = new javax.swing.JLabel();
+        payment = new javax.swing.JLabel();
+        home = new javax.swing.JLabel();
+        dashboard = new javax.swing.JLabel();
+        patients = new javax.swing.JLabel();
+        doctors = new javax.swing.JLabel();
+        staffs = new javax.swing.JLabel();
+        appointments = new javax.swing.JLabel();
+        dashpanel = new javax.swing.JPanel();
         OK = new javax.swing.JLabel();
         ADD = new javax.swing.JLabel();
         UPDATE = new javax.swing.JLabel();
         ARCHIVE = new javax.swing.JLabel();
         BACK = new javax.swing.JLabel();
+        dashpanel1 = new javax.swing.JPanel();
+        dashpanel2 = new javax.swing.JPanel();
+        dashpanel3 = new javax.swing.JPanel();
+        dashpanel4 = new javax.swing.JPanel();
+        dashpanel5 = new javax.swing.JPanel();
+        dashpanel6 = new javax.swing.JPanel();
 
         jInternalFrame1.setVisible(true);
 
@@ -147,25 +200,25 @@ public class adminDash extends javax.swing.JFrame {
         signInUser1.setText("Care Connect");
         jPanel2.add(signInUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Nirmala UI", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Admin");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 100, 30));
+        jLabel3.setText("Super Admin");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 110, 30));
 
         admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/admin.png"))); // NOI18N
-        jPanel2.add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 100, 100));
+        jPanel2.add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 100, 100));
 
         welcome.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         welcome.setForeground(new java.awt.Color(255, 255, 255));
-        welcome.setText("Care Connect");
+        welcome.setText("DentaLink");
         jPanel2.add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 30));
 
-        adminmsg.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        adminmsg.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
         adminmsg.setForeground(new java.awt.Color(255, 255, 255));
         adminmsg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminmsg.setText("Welcome,");
-        jPanel2.add(adminmsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 80, 30));
+        jPanel2.add(adminmsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 90, 30));
 
         LOGOUT.setBackground(new java.awt.Color(255, 255, 255));
         LOGOUT.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
@@ -179,9 +232,62 @@ public class adminDash extends javax.swing.JFrame {
                 LOGOUTMouseClicked(evt);
             }
         });
-        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, 30));
+        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 130, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 590));
+        payment.setBackground(new java.awt.Color(255, 255, 255));
+        payment.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        payment.setForeground(new java.awt.Color(255, 255, 255));
+        payment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        payment.setText("Payment");
+        jPanel2.add(payment, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 220, 30));
+
+        home.setBackground(new java.awt.Color(255, 255, 255));
+        home.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        home.setForeground(new java.awt.Color(255, 255, 255));
+        home.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        home.setText("Home");
+        jPanel2.add(home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 220, 30));
+
+        dashboard.setBackground(new java.awt.Color(255, 255, 255));
+        dashboard.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        dashboard.setForeground(new java.awt.Color(255, 255, 255));
+        dashboard.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dashboard.setText("Dashboard");
+        jPanel2.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 220, 30));
+
+        patients.setBackground(new java.awt.Color(255, 255, 255));
+        patients.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        patients.setForeground(new java.awt.Color(255, 255, 255));
+        patients.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        patients.setText("Manage Patients");
+        jPanel2.add(patients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 220, 30));
+
+        doctors.setBackground(new java.awt.Color(255, 255, 255));
+        doctors.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        doctors.setForeground(new java.awt.Color(255, 255, 255));
+        doctors.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        doctors.setText("Manage Doctors");
+        jPanel2.add(doctors, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 220, 30));
+
+        staffs.setBackground(new java.awt.Color(255, 255, 255));
+        staffs.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        staffs.setForeground(new java.awt.Color(255, 255, 255));
+        staffs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        staffs.setText("Manage Staffs");
+        jPanel2.add(staffs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 220, 30));
+
+        appointments.setBackground(new java.awt.Color(255, 255, 255));
+        appointments.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
+        appointments.setForeground(new java.awt.Color(255, 255, 255));
+        appointments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        appointments.setText("Appointments");
+        jPanel2.add(appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 220, 30));
+
+        dashpanel.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(dashpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 220, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 590));
 
         OK.setBackground(new java.awt.Color(0, 204, 204));
         OK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -201,7 +307,7 @@ public class adminDash extends javax.swing.JFrame {
         ADD.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         ADD.setForeground(new java.awt.Color(255, 255, 255));
         ADD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ADD.setText("ADD");
+        ADD.setText("Add");
         ADD.setDoubleBuffered(true);
         ADD.setOpaque(true);
         ADD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -215,7 +321,7 @@ public class adminDash extends javax.swing.JFrame {
         UPDATE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         UPDATE.setForeground(new java.awt.Color(255, 255, 255));
         UPDATE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        UPDATE.setText("UPDATE");
+        UPDATE.setText("Update");
         UPDATE.setDoubleBuffered(true);
         UPDATE.setOpaque(true);
         UPDATE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +335,7 @@ public class adminDash extends javax.swing.JFrame {
         ARCHIVE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         ARCHIVE.setForeground(new java.awt.Color(255, 255, 255));
         ARCHIVE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ARCHIVE.setText("ARCHIVE");
+        ARCHIVE.setText("Archive");
         ARCHIVE.setDoubleBuffered(true);
         ARCHIVE.setOpaque(true);
         ARCHIVE.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -243,7 +349,7 @@ public class adminDash extends javax.swing.JFrame {
         BACK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
         BACK.setForeground(new java.awt.Color(255, 255, 255));
         BACK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BACK.setText("BACK");
+        BACK.setText("Back");
         BACK.setDoubleBuffered(true);
         BACK.setOpaque(true);
         BACK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -252,6 +358,32 @@ public class adminDash extends javax.swing.JFrame {
             }
         });
         jPanel1.add(BACK, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 130, 30));
+
+        dashpanel1.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel1.setInheritsPopupMenu(true);
+        dashpanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 220, 30));
+
+        dashpanel2.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        dashpanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 220, 30));
+
+        dashpanel3.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 220, 30));
+
+        dashpanel4.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 220, 30));
+
+        dashpanel5.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 220, 30));
+
+        dashpanel6.setBackground(new java.awt.Color(0, 204, 204));
+        dashpanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(dashpanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 230, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 590));
 
@@ -333,7 +465,18 @@ public class adminDash extends javax.swing.JFrame {
     private javax.swing.JLabel UPDATE;
     private javax.swing.JLabel admin;
     private javax.swing.JLabel adminmsg;
+    private javax.swing.JLabel appointments;
     private javax.swing.JTable dashTable;
+    private javax.swing.JLabel dashboard;
+    private javax.swing.JPanel dashpanel;
+    private javax.swing.JPanel dashpanel1;
+    private javax.swing.JPanel dashpanel2;
+    private javax.swing.JPanel dashpanel3;
+    private javax.swing.JPanel dashpanel4;
+    private javax.swing.JPanel dashpanel5;
+    private javax.swing.JPanel dashpanel6;
+    private javax.swing.JLabel doctors;
+    private javax.swing.JLabel home;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel2;
@@ -341,7 +484,11 @@ public class adminDash extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel patients;
+    private javax.swing.JLabel payment;
     private javax.swing.JLabel signInUser1;
+    private javax.swing.JLabel staffs;
     private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
+
 }

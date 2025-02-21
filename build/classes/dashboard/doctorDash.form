@@ -204,7 +204,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="ADD"/>
+            <Property name="text" type="java.lang.String" value="Add"/>
             <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
@@ -229,7 +229,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="UPDATE"/>
+            <Property name="text" type="java.lang.String" value="Update"/>
             <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
@@ -254,7 +254,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="ARCHIVE"/>
+            <Property name="text" type="java.lang.String" value="Archive"/>
             <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
@@ -279,7 +279,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="BACK"/>
+            <Property name="text" type="java.lang.String" value="Back"/>
             <Property name="doubleBuffered" type="boolean" value="true"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>

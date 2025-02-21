@@ -6,7 +6,7 @@
 package signInUp;
 
 import config.connectDB;
-import dashboard.Udashboard;
+import dashboard.doctorDash;
 import dashboard.adminDash;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +27,7 @@ public class signIn extends javax.swing.JFrame {
     }
 
         adminDash dash = new adminDash();
-        Udashboard udash = new Udashboard();
+        doctorDash udash = new doctorDash();
         
             public static String signIn(String username, String password) {
                 connectDB connector = new connectDB();
@@ -108,7 +108,7 @@ public class signIn extends javax.swing.JFrame {
         signInUser.setBackground(new java.awt.Color(255, 255, 255));
         signInUser.setFont(new java.awt.Font("Nirmala UI", 1, 13)); // NOI18N
         signInUser.setForeground(new java.awt.Color(0, 204, 204));
-        signInUser.setText("Care Connect");
+        signInUser.setText("DentaLink");
         jPanel4.add(signInUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 28, -1, 20));
 
         userSignIn.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
@@ -308,7 +308,7 @@ public class signIn extends javax.swing.JFrame {
                     
                 } else {
                     
-                    new Udashboard().setVisible(true);  
+                    new doctorDash().setVisible(true);  
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);

@@ -2,12 +2,16 @@
 package signInUp;
 
 import config.connectDB;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 
 public class signUp extends javax.swing.JFrame {
@@ -69,8 +73,7 @@ public class signUp extends javax.swing.JFrame {
         }
         return true;
     }
-
-
+    
     private boolean validatePassword(javax.swing.JPasswordField passSU) {
         String passwordText = new String(passSU.getPassword());
         if (passwordText.isEmpty()) {
@@ -83,6 +86,43 @@ public class signUp extends javax.swing.JFrame {
         return true;
     }
     
+    
+    public class PlaceholderTextField extends JTextField {
+    private String placeholder;
+
+    public PlaceholderTextField(String placeholder) {
+        this.placeholder = placeholder;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (getText().isEmpty()) {
+            g.setColor(Color.GRAY);
+            g.drawString(placeholder, getInsets().left, getHeight() / 2 + 5);
+        }
+    }
+    }
+    
+    
+    
+    
+   public class PlaceholderPasswordField extends JPasswordField {
+    private String placeholder;
+
+    public PlaceholderPasswordField(String placeholder) {
+        this.placeholder = placeholder;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (getPassword().length == 0) {
+            g.setColor(Color.GRAY);
+            g.drawString(placeholder, getInsets().left, getHeight() / 2 + 5);
+        }
+    }
+   }
     
     private boolean isAllFieldsEmpty() {
         return fnameSU.getText().trim().isEmpty() && mnameSU.getText().trim().isEmpty()
@@ -120,12 +160,23 @@ public class signUp extends javax.swing.JFrame {
         signUpUser6 = new javax.swing.JLabel();
         SU1 = new javax.swing.JLabel();
 
+        fnameSU = new PlaceholderTextField("Enter your first name");
+        mnameSU = new PlaceholderTextField("Enter your middle name");
+        lnameSU = new PlaceholderTextField("Enter your last name");
+        userSignIn = new PlaceholderTextField("Enter your username");
+        contSU = new PlaceholderTextField("Enter your contact number");
+        emailSU = new PlaceholderTextField("Enter your email");
+        userSU = new PlaceholderTextField("Enter your username");
+        passSU = new PlaceholderPasswordField("Enter your password");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(810, 540));
         setPreferredSize(new java.awt.Dimension(810, 540));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setMinimumSize(new java.awt.Dimension(810, 540));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(0, 204, 204));
@@ -183,7 +234,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 490));
 
         mnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        mnameSU.setForeground(new java.awt.Color(204, 204, 255));
+        mnameSU.setForeground(new java.awt.Color(0, 0, 0));
         mnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnameSUActionPerformed(evt);
@@ -203,6 +254,7 @@ public class signUp extends javax.swing.JFrame {
         signUpPass.setText("Password");
         jPanel1.add(signUpPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 70, 30));
 
+        passSU.setForeground(new java.awt.Color(0, 0, 0));
         passSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passSUActionPerformed(evt);
@@ -225,7 +277,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(SIGNIN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 130, 30));
 
         userSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        userSU.setForeground(new java.awt.Color(204, 204, 255));
+        userSU.setForeground(new java.awt.Color(0, 0, 0));
         userSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userSUActionPerformed(evt);
@@ -234,7 +286,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(userSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 220, 30));
 
         fnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        fnameSU.setForeground(new java.awt.Color(204, 204, 255));
+        fnameSU.setForeground(new java.awt.Color(0, 0, 0));
         fnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameSUActionPerformed(evt);
@@ -243,7 +295,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(fnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 220, 30));
 
         contSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        contSU.setForeground(new java.awt.Color(204, 204, 255));
+        contSU.setForeground(new java.awt.Color(0, 0, 0));
         contSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contSUActionPerformed(evt);
@@ -252,7 +304,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(contSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, 30));
 
         lnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        lnameSU.setForeground(new java.awt.Color(204, 204, 255));
+        lnameSU.setForeground(new java.awt.Color(0, 0, 0));
         lnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lnameSUActionPerformed(evt);
@@ -261,7 +313,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(lnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, 30));
 
         emailSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        emailSU.setForeground(new java.awt.Color(204, 204, 255));
+        emailSU.setForeground(new java.awt.Color(0, 0, 0));
         emailSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailSUActionPerformed(evt);
@@ -548,7 +600,10 @@ public class signUp extends javax.swing.JFrame {
 //            } catch (SQLException ex) {     
 //            Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
 //        }     
-//            
+        
+
+
+        
     }//GEN-LAST:event_SIGNIN1MouseClicked
     
     private void SIGNUPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SIGNUPMouseClicked

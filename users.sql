@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2025 at 04:03 PM
+-- Generation Time: Mar 05, 2025 at 07:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,8 +45,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_fname`, `user_middle`, `user_lname`, `contact`, `user_type`, `user_name`, `email`, `user_pass`, `status`) VALUES
-(1, 'Snezhy', 'Paradela', 'Tapales', '09456989966', 'admin', 'Snezhy', 'tapales@gmail.com', 'qwe123!@#', 'Active'),
-(2, 'Rodeliza', 'La Rosa', 'Tapales', '09127689102', 'Doctor', 'Rode', 'rode@gmail.com', 'rodeliza321', 'Active');
+(1, 'Snezhy', 'Paradela', 'Tapales', '09456989966', 'Doctor', 'Snezhy', 'tapales@gmail.com', 'qwe123!@#', 'Active'),
+(2, 'Rodeliza', 'La Rosa', 'Tapales', '09127689102', 'Admin', 'Rode', 'rode@gmail.com', 'rodeliza321', 'Active'),
+(3, 'Ahlde', '', 'Geonzon', '099182736454', 'Patient', 'ahldengg', 'ahlde@gmail.com', 'pass1234', 'pending'),
+(4, 'Mica', '', 'Lariosa', '09912345678', 'Doctor', 'Mica', 'rodeliza@gmail.com', 'Pass321!@#', 'pending');
 
 --
 -- Indexes for dumped tables
@@ -66,7 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -54,38 +55,54 @@ public class signUp extends javax.swing.JFrame {
     }
 
 
-    private boolean validateField(javax.swing.JTextField field, String fieldName) {
-        if (field.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, fieldName + " cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
+//    private boolean validateField(javax.swing.JTextField field, String fieldName) {
+//        if (field.getText().trim().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, fieldName + " cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
+//            return false;
+//        }
+//        return true;
+//    }
     
     private boolean validateContact(javax.swing.JTextField contSU) {
         String contactText = contSU.getText().trim();
-        if (contactText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Contact Number cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else if (!contactText.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Contact Number must contain only numbers", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
+            if (contactText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Contact Number cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (!contactText.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Contact Number must contain only numbers", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (contactText.length() != 11) {  
+                JOptionPane.showMessageDialog(this, "Contact Number must be exactly 11 digits", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            }
+            return true;
     }
     
     private boolean validatePassword(javax.swing.JPasswordField passSU) {
         String passwordText = new String(passSU.getPassword());
-        if (passwordText.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else if (passwordText.length() < 8) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
+            if (passwordText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (passwordText.length() < 8) {
+                JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (!passwordText.matches(".*[A-Z].*")) { 
+                JOptionPane.showMessageDialog(this, "Password must contain at least one uppercase letter", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (!passwordText.matches(".*[a-z].*")) { 
+                JOptionPane.showMessageDialog(this, "Password must contain at least one lowercase letter", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (!passwordText.matches(".*\\d.*")) { 
+                JOptionPane.showMessageDialog(this, "Password must contain at least one digit", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            } else if (!passwordText.matches(".*[!@#$%^&*()_+=\\-\\[\\]{};':\"\\\\|,.<>\\/?].*")) { 
+                JOptionPane.showMessageDialog(this, "Password must contain at least one special character", "Validation Error", JOptionPane.ERROR_MESSAGE, new ImageIcon(getClass().getResource("/images/error.png")));
+                return false;
+            }
+            return true;
     }
     
+ 
     
     public class PlaceholderTextField extends JTextField {
     private String placeholder;
@@ -103,8 +120,6 @@ public class signUp extends javax.swing.JFrame {
         }
     }
     }
-    
-    
     
     
    public class PlaceholderPasswordField extends JPasswordField {
@@ -160,18 +175,8 @@ public class signUp extends javax.swing.JFrame {
         signUpUser6 = new javax.swing.JLabel();
         SU1 = new javax.swing.JLabel();
 
-        fnameSU = new PlaceholderTextField("Enter your first name");
-        mnameSU = new PlaceholderTextField("Enter your middle name");
-        lnameSU = new PlaceholderTextField("Enter your last name");
-        userSignIn = new PlaceholderTextField("Enter your username");
-        contSU = new PlaceholderTextField("Enter your contact number");
-        emailSU = new PlaceholderTextField("Enter your email");
-        userSU = new PlaceholderTextField("Enter your username");
-        passSU = new PlaceholderPasswordField("Enter your password");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(810, 540));
-        setPreferredSize(new java.awt.Dimension(810, 540));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -234,7 +239,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 490));
 
         mnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        mnameSU.setForeground(new java.awt.Color(0, 0, 0));
         mnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnameSUActionPerformed(evt);
@@ -254,7 +258,6 @@ public class signUp extends javax.swing.JFrame {
         signUpPass.setText("Password");
         jPanel1.add(signUpPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, 70, 30));
 
-        passSU.setForeground(new java.awt.Color(0, 0, 0));
         passSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passSUActionPerformed(evt);
@@ -277,7 +280,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(SIGNIN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 130, 30));
 
         userSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        userSU.setForeground(new java.awt.Color(0, 0, 0));
         userSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userSUActionPerformed(evt);
@@ -286,7 +288,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(userSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 220, 30));
 
         fnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        fnameSU.setForeground(new java.awt.Color(0, 0, 0));
         fnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fnameSUActionPerformed(evt);
@@ -295,7 +296,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(fnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 220, 30));
 
         contSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        contSU.setForeground(new java.awt.Color(0, 0, 0));
         contSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contSUActionPerformed(evt);
@@ -304,7 +304,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(contSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 220, 30));
 
         lnameSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        lnameSU.setForeground(new java.awt.Color(0, 0, 0));
         lnameSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lnameSUActionPerformed(evt);
@@ -313,7 +312,6 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(lnameSU, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 220, 30));
 
         emailSU.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        emailSU.setForeground(new java.awt.Color(0, 0, 0));
         emailSU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailSUActionPerformed(evt);
@@ -346,7 +344,7 @@ public class signUp extends javax.swing.JFrame {
         jPanel1.add(lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 30));
 
         typeUser.setEditable(true);
-        typeUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select User Type", "Patient", "Doctor", "Staff" }));
+        typeUser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a type", "Admin", "Patient", "Doctor" }));
         typeUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 typeUserActionPerformed(evt);
@@ -376,6 +374,7 @@ public class signUp extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnameSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnameSUActionPerformed
@@ -431,18 +430,13 @@ public class signUp extends javax.swing.JFrame {
                 if (firstname.isEmpty()) {
                     errorMessage.append("First Name cannot be empty.\n");
                 }
-                if (middlename.isEmpty()) {
-                    errorMessage.append("Middle Name cannot be empty.\n");
-                }
+               
                 if (lastname.isEmpty()) {
                     errorMessage.append("Last Name cannot be empty.\n");
                 }
 
-                String contactText = contSU.getText().trim();
-                if (contactText.isEmpty()) {
-                    errorMessage.append("Contact Number cannot be empty.\n");
-                } else if (!contactText.matches("\\d+")) {
-                    errorMessage.append("Contact Number must contain only numbers.\n");
+                if (!validateContact(contSU)) { 
+                    return;
                 }
 
                 if (typeUser.getSelectedIndex() == 0) {
@@ -463,11 +457,8 @@ public class signUp extends javax.swing.JFrame {
                     errorMessage.append("Username is already taken.\n");
                 }
 
-                String passwordText = new String(password);
-                if (passwordText.isEmpty()) {
-                    errorMessage.append("Password cannot be empty.\n");
-                } else if (passwordText.length() < 8) {
-                    errorMessage.append("Password must be at least 8 characters long.\n");
+                if (!validatePassword(passSU)) { 
+                    return;
                 }
             }
 
@@ -502,106 +493,6 @@ public class signUp extends javax.swing.JFrame {
                 } catch (SQLException ex) {     
                 Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
             }     
-
-                    
-//        boolean isValid = true;
-//        
-//            if (isAllFieldsEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Please fill out the registration form", "Empty Form", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//
-//            if (fnameSU.getText().trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "First Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//            if (mnameSU.getText().trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Middle Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//            if (lnameSU.getText().trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Last Name cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//
-//        String contactText = contSU.getText().trim();
-//            if (contactText.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Contact Number cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            } else if (!contactText.matches("\\d+")) {
-//                JOptionPane.showMessageDialog(this, "Contact Number must contain only numbers", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//            // Validate Type
-//            if (typeUser.getSelectedIndex() == 0) {
-//                JOptionPane.showMessageDialog(this, "Please select type", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//        // Validate Username
-//        String emailText = emailSU.getText().trim();
-//            if (emailText.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Email cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            } else if (!isValidEmail(emailText)) {
-//                JOptionPane.showMessageDialog(this, "Invalid email format", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//        // Validate Email
-//        String usernameText = userSU.getText().trim();
-//            if (usernameText.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Username cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            } else if (isUsernameTaken(usernameText)) {
-//                JOptionPane.showMessageDialog(this, "Username is already taken", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-//
-//        // Validate Password
-//        String passwordText = new String(password); // Convert char[] to String for validation
-//            if (passwordText.isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Password cannot be empty", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            } else if (passwordText.length() < 8) {
-//                JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long", "Validation Error", JOptionPane.ERROR_MESSAGE);
-//                isValid = false;
-//            }
-        
-        // If all validations pass, proceed with registration
-//        if (isValid) {
-//            String hashedPassword = BCrypt.hashpw(passwordText, BCrypt.gensalt());
-            
-//            String sql = "INSERT INTO users (user_fname, user_middle, user_lname, contact, email, user_type, user_name, user_pass, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Removed user_id
-//            try (PreparedStatement pst = connect.getConnection().prepareStatement(sql)) {
-//                pst.setString(1, firstname);
-//                pst.setString(2, middlename);
-//                pst.setString(3, lastname);
-//                pst.setString(4, contact);
-//                pst.setString(5, email);
-//                pst String.setString(6, type);
-//                pst.setString(7, username);   
-//                pst.setString(8, passwordText);
-//                pst.setString(9, "pending");
-//                pst.executeUpdate();
-//                JOptionPane.showMessageDialog(this, "Registration Successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-//                fnameSU.setText("");
-//                mnameSU.setText("");
-//                lnameSU.setText("");
-//                contSU.setText("");
-//                emailSU.setText("");
-//                userSU.setText("");
-//                passSU.setText("");
-//         
-//            } catch (SQLException ex) {     
-//            Logger.getLogger(signUp.class.getName()).log(Level.SEVERE, null, ex);
-//        }     
-        
-
 
         
     }//GEN-LAST:event_SIGNIN1MouseClicked

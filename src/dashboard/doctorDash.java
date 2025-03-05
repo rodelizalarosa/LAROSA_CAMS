@@ -1,11 +1,15 @@
 
 package dashboard;
 
+import signInUp.signIn;
+
 public class doctorDash extends javax.swing.JFrame {
 
-   
-    public doctorDash() {
+    private int loggedInDoctorId;
+    
+    public doctorDash(int userId) {
         initComponents();
+        this.loggedInDoctorId = userId;
     }
 
     /**
@@ -21,7 +25,7 @@ public class doctorDash extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         signInUser1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        doctor = new javax.swing.JLabel();
         admin = new javax.swing.JLabel();
         welcome = new javax.swing.JLabel();
         adminmsg = new javax.swing.JLabel();
@@ -32,6 +36,9 @@ public class doctorDash extends javax.swing.JFrame {
         ARCHIVE = new javax.swing.JLabel();
         BACK = new javax.swing.JLabel();
         OK = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        icon = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,11 +58,9 @@ public class doctorDash extends javax.swing.JFrame {
         signInUser1.setText("Care Connect");
         jPanel2.add(signInUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Doctor");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 100, 30));
+        doctor.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
+        doctor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jPanel2.add(doctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 100, 30));
 
         admin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/doctor.png"))); // NOI18N
         jPanel2.add(admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 100, 100));
@@ -66,10 +71,9 @@ public class doctorDash extends javax.swing.JFrame {
         jPanel2.add(welcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, 30));
 
         adminmsg.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
-        adminmsg.setForeground(new java.awt.Color(255, 255, 255));
         adminmsg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         adminmsg.setText("Welcome,");
-        jPanel2.add(adminmsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 80, 30));
+        jPanel2.add(adminmsg, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 100, 30));
 
         LOGOUT.setBackground(new java.awt.Color(255, 255, 255));
         LOGOUT.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
@@ -83,10 +87,10 @@ public class doctorDash extends javax.swing.JFrame {
                 LOGOUTMouseClicked(evt);
             }
         });
-        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 130, 30));
+        jPanel2.add(LOGOUT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 610, 150, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 590));
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 610, 390));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 660));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 820, 460));
 
         ADD.setBackground(new java.awt.Color(0, 204, 204));
         ADD.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -100,7 +104,7 @@ public class doctorDash extends javax.swing.JFrame {
                 ADDMouseClicked(evt);
             }
         });
-        jPanel1.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 130, 30));
+        jPanel1.add(ADD, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 130, 30));
 
         UPDATE.setBackground(new java.awt.Color(0, 204, 204));
         UPDATE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -114,7 +118,7 @@ public class doctorDash extends javax.swing.JFrame {
                 UPDATEMouseClicked(evt);
             }
         });
-        jPanel1.add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 130, 30));
+        jPanel1.add(UPDATE, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 130, 30));
 
         ARCHIVE.setBackground(new java.awt.Color(0, 204, 204));
         ARCHIVE.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -128,7 +132,7 @@ public class doctorDash extends javax.swing.JFrame {
                 ARCHIVEMouseClicked(evt);
             }
         });
-        jPanel1.add(ARCHIVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 30));
+        jPanel1.add(ARCHIVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 130, 30));
 
         BACK.setBackground(new java.awt.Color(0, 204, 204));
         BACK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -142,7 +146,7 @@ public class doctorDash extends javax.swing.JFrame {
                 BACKMouseClicked(evt);
             }
         });
-        jPanel1.add(BACK, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 130, 30));
+        jPanel1.add(BACK, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 130, 30));
 
         OK.setBackground(new java.awt.Color(0, 204, 204));
         OK.setFont(new java.awt.Font("Nirmala UI", 1, 15)); // NOI18N
@@ -156,17 +160,33 @@ public class doctorDash extends javax.swing.JFrame {
                 OKMouseClicked(evt);
             }
         });
-        jPanel1.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 150, 50, 30));
+        jPanel1.add(OK, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 150, 50, 30));
+
+        jPanel3.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
+        jPanel3.add(icon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Nirmala UI", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Doctor Dashboard");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 140, 30));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 840, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 856, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +194,11 @@ public class doctorDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
+        
+        signIn sn = new signIn();
+        sn.setLocationRelativeTo(null);
+        sn.setVisible(true);
+       
         this.dispose();
     }//GEN-LAST:event_LOGOUTMouseClicked
 
@@ -232,7 +257,7 @@ public class doctorDash extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new doctorDash().setVisible(true);
+                new doctorDash(1).setVisible(true);
             }
         });
     }
@@ -246,10 +271,13 @@ public class doctorDash extends javax.swing.JFrame {
     private javax.swing.JLabel UPDATE;
     private javax.swing.JLabel admin;
     private javax.swing.JLabel adminmsg;
+    private javax.swing.JLabel doctor;
+    private javax.swing.JLabel icon;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel signInUser1;
     private javax.swing.JLabel welcome;

@@ -2,6 +2,7 @@
 package signInUp;
 
 import config.connectDB;
+import dashboard.User;
 import dashboard.doctorDash;
 import dashboard.adminDash;
 import java.awt.Color;
@@ -26,12 +27,10 @@ public class signIn extends javax.swing.JFrame {
         
     }
 
-    adminDash dash = new adminDash();
-    doctorDash udash = new doctorDash();
-
-    public static String signIn(String username, String password) {
+    public static User signIn(String username, String password) {
         connectDB connector = new connectDB();
-        String query = "SELECT user_type, status FROM users WHERE user_name = ? AND user_pass = ?";
+        String query = "SELECT user_type, status, user_id FROM users WHERE user_name = ? AND user_pass = ?"; // Include user_id in the query
+
 
         try (PreparedStatement pstmt = connector.getConnection().prepareStatement(query)) {
             pstmt.setString(1, username);
@@ -39,12 +38,15 @@ public class signIn extends javax.swing.JFrame {
             ResultSet resultSet = pstmt.executeQuery();
 
             if (resultSet.next()) {
-                String status = resultSet.getString("status");
+            String status = resultSet.getString("status");
 
                 if (status.equalsIgnoreCase("pending")) {
-                    return "inactive"; // Indicate that the account is inactive
+                return null; // Indicate inactive account (or you can create a User object with a specific status)
                 }
-                return resultSet.getString("user_type"); // Return the user's role if active
+                
+                String userType = resultSet.getString("user_type");
+                int userId = resultSet.getInt("user_id");
+                return new User(userType, userId);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -327,24 +329,20 @@ public class signIn extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please fill in both fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
-            String role = signIn(username, password);
+            User user = signIn(username, password); // Call the modified signIn method
 
-            if ("inactive".equals(role)) {
-                JOptionPane.showMessageDialog(this, "Your account is inactive. Please contact support.", "Account Inactive", JOptionPane.WARNING_MESSAGE);
-            } else if (role != null) {
+            if (user == null) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password or inactive account.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            } else {
                 JOptionPane.showMessageDialog(this, "Login successful!", "Welcome", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
 
-                if (role.equalsIgnoreCase("admin")) {
-                    new adminDash().setVisible(true);
-
+                if (user.getUserType().equalsIgnoreCase("admin")) {
+                    new adminDash(user.getUserId()).setVisible(true); // Pass userId to adminDash
                 } else {
-
-                    new doctorDash().setVisible(true);
+                    new doctorDash(user.getUserId()).setVisible(true); // Pass userId to doctorDash
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
-            }
+            } 
         }
 
 //        dashboard dash = new dashboard();
@@ -373,9 +371,7 @@ public class signIn extends javax.swing.JFrame {
     }//GEN-LAST:event_userSignInFocusLost
 
     private void passSignInFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passSignInFocusLost
-
-            
-
+         
          String pass = passSignIn.getText();
 
         if (pass.isEmpty()) {
@@ -388,8 +384,6 @@ public class signIn extends javax.swing.JFrame {
         }
 
         userSignIn.repaint();
-
-
 
     }//GEN-LAST:event_passSignInFocusLost
 
@@ -410,7 +404,7 @@ public class signIn extends javax.swing.JFrame {
     }//GEN-LAST:event_hidePassMouseClicked
     
     public class PlaceholderTextField extends JTextField {
-    private String placeholder;
+        private String placeholder;
 
     public PlaceholderTextField(String placeholder) {
         this.placeholder = placeholder;
@@ -426,8 +420,7 @@ public class signIn extends javax.swing.JFrame {
     }
     }
     
-    
-    
+   
     
    public class PlaceholderPasswordField extends JPasswordField {
     private String placeholder;

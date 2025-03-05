@@ -1,6 +1,8 @@
 
 package dashboard;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import signInUp.signIn;
 
 public class doctorDash extends javax.swing.JFrame {
@@ -195,11 +197,23 @@ public class doctorDash extends javax.swing.JFrame {
 
     private void LOGOUTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LOGOUTMouseClicked
         
-        signIn sn = new signIn();
-        sn.setLocationRelativeTo(null);
-        sn.setVisible(true);
-       
-        this.dispose();
+        int choice = JOptionPane.showConfirmDialog(
+        this, 
+        "Are you sure you want to log out?", 
+        "Confirm Logout", 
+        JOptionPane.YES_NO_OPTION, 
+        JOptionPane.QUESTION_MESSAGE, 
+        new ImageIcon(getClass().getResource("/images/logoutIcon.png")) 
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            signIn sn = new signIn();
+            sn.setLocationRelativeTo(null);
+            sn.setVisible(true);
+
+            this.dispose();
+        }
+      
     }//GEN-LAST:event_LOGOUTMouseClicked
 
     private void ADDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ADDMouseClicked

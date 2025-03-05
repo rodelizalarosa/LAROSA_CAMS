@@ -141,9 +141,8 @@ public class adminDash extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 800));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dashTable.setBackground(new java.awt.Color(0, 0, 0));
+        dashTable.setBackground(new java.awt.Color(153, 255, 255));
         dashTable.setFont(new java.awt.Font("Nirmala UI", 0, 12)); // NOI18N
-        dashTable.setForeground(new java.awt.Color(204, 255, 255));
         dashTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -259,7 +258,7 @@ public class adminDash extends javax.swing.JFrame {
                 dashpanel3MouseExited(evt);
             }
         });
-        dashpanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        dashpanel3.setLayout(null);
 
         patients.setBackground(new java.awt.Color(51, 51, 51));
         patients.setFont(new java.awt.Font("Nirmala UI", 1, 18)); // NOI18N
@@ -270,7 +269,8 @@ public class adminDash extends javax.swing.JFrame {
                 patientsMouseEntered(evt);
             }
         });
-        dashpanel3.add(patients, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 230, 30));
+        dashpanel3.add(patients);
+        patients.setBounds(0, 10, 230, 30);
 
         jPanel2.add(dashpanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 240, 50));
 
